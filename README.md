@@ -8,11 +8,16 @@
 python -m pip install -r ./requirements.txt
 ```
 
+- macos의 경우 brew로 추가 패키지 설치가 필요할 수 있습니다.
+```
+brew install portaudio
+```
+
 #### 2. 앱 실행
 - 사전에 us-east-1에 Bedrock 모델 access 설정은 되어 있어야 합니다.
 ```
 python app.py
 ```
 
-#### 앱이 실행되면, 로컬 환경의 마이크로 음성(한국어)를 인식합니다.
+#### 앱이 실행되면, 로컬 환경(랩탑)의 mic 로 음성(한국어)을 인식합니다.
 ![result1](./img/result1.png)
