@@ -15,3 +15,4 @@ python app.py
 ```
 
 #### 앱이 실행되면, 로컬 환경의 마이크로 음성(한국어)를 인식합니다.
+![result1](./img/result1.png)
