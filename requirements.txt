@@ -1,0 +1,9 @@
+awscli
+boto3
+botocore
+pyaudio
+sounddevice
+amazon-transcribe
+aiofile
+anthropic
+langchain
