@@ -15,7 +15,7 @@
 python3 -m pip install -r ./requirements.txt
 ```
  
-- macos의 경우 brew를 통한 추가 패키지 설치가 필요할 수 있습니다.
+- macOS의 경우 brew를 통한 추가 패키지 설치가 필요할 수 있습니다.
 ```
 brew install portaudio
 ```
