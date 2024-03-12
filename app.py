@@ -5,11 +5,13 @@ import boto3
 import botocore
 import asyncio
 import sounddevice
+
 from amazon_transcribe.client import TranscribeStreamingClient
 from amazon_transcribe.handlers import TranscriptResultStreamHandler
 from amazon_transcribe.model import TranscriptEvent
 from langchain_community.chat_models import BedrockChat
 from langchain_core.messages import HumanMessage
+
 
 #사용자 음성 입력(한국어)
 prompt = """Human:  
@@ -91,10 +93,13 @@ def bedrock_claude3():
     
     print("Bedrock:") 
     
-    # "content" 항목에서 "text" 필드의 값을 추출하여 출력
+    bedrock_response = ""
     for item in response_dict["content"]:
         if "text" in item:
-          print(item["text"])
+            text = item["text"]
+            print(text)
+            bedrock_response += text + " "
+
 
 
 async def basic_transcribe():
