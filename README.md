@@ -1,7 +1,7 @@
 # Voice Chatbot test with Transcribe, Polly and Bedrock (Claude v3 Sonnet)
 
 #### 테스트 환경
-- Macbook M1 Pro (macOS Sonoma)
+- MacBook M1 Pro (macOS Sonoma)
 
 
 ### Architecture 
@@ -10,31 +10,31 @@
 ### 실행 방법
 
 #### 1. 패키지 설치
-- Local(Macbook)에 aws cli [설치](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) 및 [설정](https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-quickstart.html)은 미리 완료되어 있어야 합니다. (aws configure)
+- 로컬 기기(MacBook)에 미리 AWS CLI를 [설치](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) 하고 [구성](https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-quickstart.html) 해야 합니다. (aws configure)
 ```
 python3 -m pip install -r ./requirements.txt
 ```
  
-- macOS의 경우 brew를 통한 추가 패키지 설치가 필요할 수 있습니다.
+- macOS의 경우 Homebrew를 통한 추가 패키지 설치가 필요할 수 있습니다.
 ```
 brew install portaudio
 ```
 
 #### 2. 앱 실행
-- 사전에 us-east-1에 Bedrock 모델 access 설정은 되어 있어야 합니다.
+- us-east-1 리전에서 Bedrock 모델 접근 권한을 미리 구성해야 합니다. (claude v3 sonnet)
 ```
 python3 app.py
 ```
 
 ![result1](./img/result1.png)
 
-#### 앱이 실행되면, 로컬 환경(랩탑)의 mic 로 음성(한국어)을 말합니다.
-> Amazon Transcribe로 한국어 음성을 입력 받습니다. <br>
-> Bedrock으로 출력된 응답은 Amazon Polly로 한국어 음성으로 출력 됩니다. 
+#### 애플리케이션이 실행되면 로컬 기기(Macbook)의 Mic로 한국어로 말하세요.
+> Amazon Transcribe가 한국어 음성 입력을 받습니다. <br>
+> Amazon Bedrock에서 생성된 응답은 Amazon Polly를 통해 한국어 음성으로 재생됩니다. 
 
 
 <br>
 
 
-### Reference
+### 참고 자료
 [aws-samples/amazon-bedrock-voice-conversation](https://github.com/aws-samples/amazon-bedrock-voice-conversation)
