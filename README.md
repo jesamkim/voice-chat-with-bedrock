@@ -1,4 +1,11 @@
-# Voice Chat test with Amazon Transcribe and Amazon Bedrock (Claude v3 Sonnet)
+# Voice Chatbot test with Transcribe, Polly and Bedrock (Claude v3 Sonnet)
+
+#### 테스트 환경
+- Macbook M1 Pro (macos)
+
+
+### Architecture
+![test-architecture](./img/test-architecture.png)
 
 ### 실행 방법
 
@@ -19,5 +26,15 @@ brew install portaudio
 python3 app.py
 ```
 
-#### 앱이 실행되면, 로컬 환경(랩탑)의 mic 로 음성(한국어)을 인식합니다.
 ![result1](./img/result1.png)
+
+#### 앱이 실행되면, 로컬 환경(랩탑)의 mic 로 음성(한국어)을 말합니다.
+> Amazon Transcribe로 한국어 음성을 입력 받습니다. <br>
+> Bedrock으로 출력된 응답은 Amazon Polly로 한국어 음성으로 출력 됩니다. 
+
+
+<br>
+
+
+### Reference
+[aws-samples/amazon-bedrock-voice-conversation](https://github.com/aws-samples/amazon-bedrock-voice-conversation)

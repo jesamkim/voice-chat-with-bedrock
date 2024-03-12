@@ -99,7 +99,21 @@ def bedrock_claude3():
             text = item["text"]
             print(text)
             bedrock_response += text + " "
+    
+    # Polly로 음성 합성
+    polly_client = boto3.client('polly')
+    response = polly_client.synthesize_speech(
+        Text=bedrock_response,
+        OutputFormat='mp3',
+        VoiceId='Seoyeon'  # 한국어 음성 'Seoyeon' 사용
+    )
+    
+    # 음성 데이터를 파일로 저장
+    with open('bedrock_response.mp3', 'wb') as f:
+        f.write(response['AudioStream'].read())
 
+    # 음성 파일 재생 (macOS에서는 'afplay' 명령어 사용)
+    os.system('afplay bedrock_response.mp3')
 
 
 async def basic_transcribe():
