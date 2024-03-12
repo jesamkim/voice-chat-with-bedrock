@@ -10,7 +10,7 @@
 ### 실행 방법
 
 #### 1. 패키지 설치
-- Loca(Macbook)에 aws cli 설정은 미리되어 있어야 합니다. (aws configure)
+- Local(Macbook)에 aws cli [설치](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) 및 [설정](https://docs.aws.amazon.com/ko_kr/cli/latest/userguide/getting-started-quickstart.html)은 미리 완료되어 있어야 합니다. (aws configure)
 ```
 python3 -m pip install -r ./requirements.txt
 ```
