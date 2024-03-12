@@ -15,7 +15,12 @@ from langchain_core.messages import HumanMessage
 
 #사용자 음성 입력(한국어)
 prompt = """Human:  
-모르는 내용은 모른다고 답해주세요. """
+다음 <context>에 대해 다음 지시 사항을 따라 주세요.
+1. 맞춤법이나 띄어쓰기가 잘못되어 있으면 수정하세요.
+2. 답변만 출력 해주세요.
+
+<context>
+"""
 
 
 class MyEventHandler(TranscriptResultStreamHandler):
@@ -64,6 +69,11 @@ def bedrock_claude3():
         service_name="bedrock-runtime",
         region_name="us-east-1",
     )
+    
+    # prompt 후처리
+    global prompt
+    prompt = prompt + "</context> Assistant:"
+    
     bedrock_model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
     payload = {
         "modelId": bedrock_model_id,
@@ -72,6 +82,9 @@ def bedrock_claude3():
         "body": {
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": 1000,
+            "temperature": 0.0,
+            "top_p": 0.0,
+            "top_k": 0,
             "messages": [
                 {
                     "role": "user", 
@@ -114,6 +127,9 @@ def bedrock_claude3():
 
     # 음성 파일 재생 (macOS에서는 'afplay' 명령어 사용)
     os.system('afplay bedrock_response.mp3')
+    
+    # 음성 파일 삭제
+    os.remove('bedrock_response.mp3')
 
 
 async def basic_transcribe():
@@ -138,7 +154,7 @@ async def basic_transcribe():
     
     
 ###########
-print("음성 채팅을 시작합니다. 한국어로 말해주세요. 입력을 마치려면 Enter키를 누르세요. \n")
+print("\n 음성 채팅을 시작합니다. 한국어로 말해주세요. 입력을 마치려면 Enter키를 누르세요. \n")
 
 print("YOU : ")
 loop = asyncio.get_event_loop()
