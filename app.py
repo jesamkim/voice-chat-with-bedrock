@@ -17,7 +17,7 @@ from langchain_core.messages import HumanMessage
 prompt = """Human:  
 다음 <context>에 대해 다음 지시 사항을 따라 주세요.
 1. 맞춤법이나 띄어쓰기가 잘못되어 있으면 수정하세요.
-2. 답변만 출력 해주세요.
+2. 질의에 대한 답변만 출력 해주세요.
 
 <context>
 """
@@ -82,9 +82,9 @@ def bedrock_claude3():
         "body": {
             "anthropic_version": "bedrock-2023-05-31",
             "max_tokens": 1000,
-            "temperature": 0.0,
-            "top_p": 0.0,
-            "top_k": 0,
+            #"temperature": 0.0,
+            #"top_p": 0.0,
+            #"top_k": 0,
             "messages": [
                 {
                     "role": "user", 
