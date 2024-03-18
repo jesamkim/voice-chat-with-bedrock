@@ -1,4 +1,4 @@
-# Voice Chatbot test with Transcribe, Polly and Bedrock (Claude v3 Sonnet)
+# Voice Chatbot test with Transcribe, Polly and Bedrock (with Claude 3)
 
 #### 테스트 환경
 - MacBook M1 Pro (macOS Sonoma)
