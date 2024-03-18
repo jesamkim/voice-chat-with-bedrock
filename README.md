@@ -21,7 +21,7 @@ brew install portaudio
 ```
 
 #### 2. 앱 실행
-- us-east-1 리전에서 Bedrock 모델 접근 권한을 미리 구성해야 합니다. (claude v3 sonnet)
+- us-west-2 리전에서 Bedrock 모델 접근 권한을 미리 구성해야 합니다. (claude 3 Haiku)
 ```
 python3 app.py
 ```

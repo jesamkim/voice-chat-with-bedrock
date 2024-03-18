@@ -18,6 +18,7 @@ prompt = """Human:
 다음 <context>에 대해 다음 지시 사항을 따라 주세요.
 1. 맞춤법이나 띄어쓰기가 잘못되어 있으면 수정하세요.
 2. 질의에 대한 답변만 출력 해주세요.
+3. 이해할 수 없는 질의라면 '이해하기 어렵습니다.'라고만 대답해주세요.
 
 <context>
 """
@@ -67,14 +68,14 @@ def bedrock_claude3():
     session = boto3.Session()
     bedrock_runtime = session.client(
         service_name="bedrock-runtime",
-        region_name="us-east-1",
+        region_name="us-west-2",
     )
     
     # prompt 후처리
     global prompt
     prompt = prompt + "</context> Assistant:"
     
-    bedrock_model_id = "anthropic.claude-3-sonnet-20240229-v1:0"
+    bedrock_model_id = "anthropic.claude-3-haiku-20240307-v1:0"
     payload = {
         "modelId": bedrock_model_id,
         "contentType": "application/json",
@@ -85,10 +86,9 @@ def bedrock_claude3():
             #"temperature": 0.0,
             #"top_p": 0.0,
             #"top_k": 0,
-            "messages": [
-                {
-                    "role": "user", 
-                    "content": [{"type": "text", "text": prompt}]
+            "messages": [{
+                "role": "user", 
+                "content": [{"type": "text", "text": prompt}]
                 },
             ]
         }
