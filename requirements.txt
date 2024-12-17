@@ -5,5 +5,3 @@ pyaudio
 sounddevice
 amazon-transcribe
 aiofile
-anthropic
-langchain
