@@ -68,7 +68,7 @@ async def write_chunks(stream, stop_event):
 
 
 
-def bedrock_inference():
+def bedrock_claude3():
     session = boto3.Session()
     bedrock_runtime = session.client(
         service_name="bedrock-runtime",
@@ -79,18 +79,20 @@ def bedrock_inference():
     global prompt
     prompt = prompt + "</context> Assistant:"
     
-    bedrock_model_id = "us.amazon.nova-micro-v1:0"
+    bedrock_model_id = "anthropic.claude-3-haiku-20240307-v1:0"
     payload = {
         "modelId": bedrock_model_id,
         "contentType": "application/json",
         "accept": "application/json",
         "body": {
-            "inferenceConfig": {
-                "max_new_tokens": 1000
-            },
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 1000,
+            #"temperature": 0.0,
+            #"top_p": 0.0,
+            #"top_k": 0,
             "messages": [{
                 "role": "user", 
-                "content": [{"text": prompt}]
+                "content": [{"type": "text", "text": prompt}]
                 },
             ]
         }
@@ -106,53 +108,14 @@ def bedrock_inference():
     # 문자열을 딕셔너리로 변환
     response_dict = json.loads(response_body)
     
-    # 디버깅을 위해 전체 응답 구조 확인
-    print("Bedrock 응답 구조:", json.dumps(response_dict, indent=2, ensure_ascii=False))
-    
     print("Bedrock:") 
     
     bedrock_response = ""
-    
-    # Nova 모델의 응답 형식 처리
-    if "output" in response_dict and "message" in response_dict["output"] and "content" in response_dict["output"]["message"]:
-        # Nova 모델 응답 형식
-        content_list = response_dict["output"]["message"]["content"]
-        for item in content_list:
-            if "text" in item:
-                text = item["text"]
-                print(text)
-                bedrock_response += text + " "
-    elif "content" in response_dict:
-        # Claude 스타일 응답
-        for item in response_dict["content"]:
-            if "text" in item:
-                text = item["text"]
-                print(text)
-                bedrock_response += text + " "
-    elif "completion" in response_dict:
-        # 일부 모델의 응답 형식
-        text = response_dict["completion"]
-        print(text)
-        bedrock_response = text
-    elif "outputText" in response_dict:
-        # 다른 가능한 응답 형식
-        text = response_dict["outputText"]
-        print(text)
-        bedrock_response = text
-    elif "output" in response_dict and "text" in response_dict["output"]:
-        # 또 다른 가능한 응답 형식
-        text = response_dict["output"]["text"]
-        print(text)
-        bedrock_response = text
-    elif "generated_text" in response_dict:
-        # 일부 모델의 응답 형식
-        text = response_dict["generated_text"]
-        print(text)
-        bedrock_response = text
-    else:
-        # 알 수 없는 응답 형식인 경우
-        print("알 수 없는 응답 형식, 응답 구조를 확인하세요.")
-        bedrock_response = "응답 형식을 해석할 수 없습니다."
+    for item in response_dict["content"]:
+        if "text" in item:
+            text = item["text"]
+            print(text)
+            bedrock_response += text + " "
     
     # Polly로 음성 합성
     polly_client = boto3.client('polly')
@@ -202,4 +165,4 @@ loop = asyncio.get_event_loop()
 loop.run_until_complete(basic_transcribe())
 loop.close()
 
-bedrock_inference() # 프로그램 종료 시 챗봇 대답 출력
+bedrock_claude3() # 프로그램 종료 시 챗봇 대답 출력

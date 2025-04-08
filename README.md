@@ -1,11 +1,12 @@
-# Voice Chatbot test with Transcribe, Polly and Bedrock (with Claude 3)
+# Voice Chatbot test with Transcribe, Polly and Bedrock
 
 #### 테스트 환경
-- MacBook M1 Pro (macOS Sonoma)
+- MacBook M1 Pro (macOS)
 
 
 ### Architecture 
 ![test-architecture](./img/test-architecture.png)
+* app.py 에 적용된 FM은 Amazon Nova Micro 입니다.
 
 ### 실행 방법
 
@@ -21,7 +22,7 @@ brew install portaudio
 ```
 
 #### 2. 앱 실행
-- us-west-2 리전에서 Bedrock 모델 접근 권한을 미리 구성해야 합니다. (claude 3 Haiku)
+- us-west-2 리전에서 Bedrock 모델 접근 권한을 미리 구성해야 합니다. (Nova Lite)
 ```
 python3 app.py
 ```
