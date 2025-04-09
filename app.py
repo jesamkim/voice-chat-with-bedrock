@@ -109,7 +109,7 @@ def bedrock_inference():
     # 디버깅을 위해 전체 응답 구조 확인
     print("Bedrock 응답 구조:", json.dumps(response_dict, indent=2, ensure_ascii=False))
     
-    print("Bedrock:") 
+    print("\n\nBedrock:") 
     
     bedrock_response = ""
     
@@ -157,6 +157,7 @@ def bedrock_inference():
     # Polly로 음성 합성
     polly_client = boto3.client('polly')
     response = polly_client.synthesize_speech(
+        Engine='neural',  # Neural 엔진 사용
         Text=bedrock_response,
         OutputFormat='mp3',
         VoiceId='Seoyeon'  # 한국어 음성 'Seoyeon' 사용
@@ -175,7 +176,7 @@ def bedrock_inference():
 
 async def basic_transcribe():
     global prompt  # 전역 변수 사용 선언
-    client = TranscribeStreamingClient(region="us-east-1")
+    client = TranscribeStreamingClient(region="ap-northeast-2")
     stream = await client.start_stream_transcription(
         language_code="ko-KR",
         media_sample_rate_hz=16000,
